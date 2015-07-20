@@ -6,7 +6,7 @@
         <span>Sort order: </span>
         <select class="input-sm" ng-model="sortOrder"
                 ng-options="o.v as o.n for o in [{ n: 'Ascending', v: false }, { n: 'Descending', v: true }]"></select>
-
+        <a ui-sref="addCat" class="btn btn-primary">Add cat</a>
 
     </div>
     <table class="table table-hover">

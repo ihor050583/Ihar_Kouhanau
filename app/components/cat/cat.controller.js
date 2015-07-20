@@ -22,8 +22,5 @@ function catController($scope, catService, $filter, $state) {
     $scope.search = function (searchString) {
         $scope.cats = $filter('catSearch')(catService.getCats(), searchString);
     };
-
-    $scope.cancel = function() {
-        $state.go("cats");
-    };
+    
 }
