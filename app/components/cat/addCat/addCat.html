@@ -1,0 +1,20 @@
+﻿<form name="myForm" novalidate>
+    <div>
+        <label for="name">Cat's name </label>
+        <input type="text" name="name" ng-model="name" required />
+        <span style="color: red" ng-show="submitted && myForm.name.$error.required">Required!</span>
+        
+    </div>
+
+    <div>
+        <label for="image">URL of image</label>
+        <input ng-blur="url=image" type="url" name="image" ng-model="image" required />
+        <span style="color: red" ng-show="submitted && myForm.image.$error.required">Required!</span>
+        <span style="color: red" ng-show="submitted && myForm.$error.url">Invalid URL format!</span>
+        
+    </div>
+
+    <button ng-click="save(myForm)">Submit</button>
+    <button ng-click="cancel()">Cancel</button>
+</form>
+<div ng-show="url"><img ng-src="{{url}}" /></div>
