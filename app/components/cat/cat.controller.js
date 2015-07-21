@@ -6,9 +6,9 @@ angular
 
 function catController($scope, catService, $filter, $state) {
 
-    $scope.click = function (catId) {
-        catService.click(catId);
-        $scope.currentCat = catService.getCurrentCat();
+    $scope.click = function (cat) {
+        catService.click(cat.id);
+        $scope.currentCat = cat;
     }
 
     $scope.sortOrder = false;

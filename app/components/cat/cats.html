@@ -18,7 +18,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr ng-click="click(cat.id)" ng-repeat="cat in cats | orderBy : name : sortOrder | filter:{name:searchString}">
+            <tr ng-click="click(cat)" ng-repeat="cat in cats | orderBy : name : sortOrder | filter:{name:searchString}">
                 <td>{{cat.name}}</td>
                 <td>{{cat.votes}}</td>
                 <td>{{cat.number}}</td>
