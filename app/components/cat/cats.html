@@ -1,51 +1,47 @@
-﻿<div >
+﻿<div class="row">
+    <article class="col-md-7">
+        <div>
+            <input type="text" ng-model="searchString" placeholder="Enter your search string" />
+            <span>Sort order: </span>
+            <select class="input-sm" ng-model="sortOrder"
+                    ng-options="o.v as o.n for o in [{ n: 'Ascending', v: false }, { n: 'Descending', v: true }]">
+            </select>
+          
+            <a ui-sref="addCat" class="btn btn-primary">Add cat</a>
 
-    <div>
-        <input type="text" ng-model="searchString" placeholder="Enter your search string" />       
-        <span>Sort order: </span>
-        <select class="input-sm" ng-model="sortOrder"
-                ng-options="o.v as o.n for o in [{ n: 'Ascending', v: false }, { n: 'Descending', v: true }]"></select>
-        <a ui-sref="addCat" class="btn btn-primary">Add cat</a>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Votes</th>
+                    <th>Clicks</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-click="click(cat)" ng-repeat="cat in cats | orderBy : name : sortOrder | filter:{name:searchString}">
+                    <td>{{cat.name}}</td>
+                    <td>{{cat.votes}}</td>
+                    <td>{{cat.number}}</td>
+                    <td><img class="sign" ng-if="cat.click" src="img/download.png" /></td>
 
-    </div>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Votes</th>
-            <th>Clicks</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr ng-click="click(cat)" ng-repeat="cat in cats | orderBy : name : sortOrder | filter:{name:searchString}">
-                <td>{{cat.name}}</td>
-                <td>{{cat.votes}}</td>
-                <td>{{cat.number}}</td>
-                <td><img class="sign" ng-if="cat.click" src="img/download.png" /></td>
-
-            </tr>
-        </tbody>
-    </table>
-
-
-    <div>
-        <table class="table" ng-if="currentCat">
-            <tr>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Number of votes</th>
-            </tr>
-            <tr>
-                <td>{{currentCat.name}}</td>
-                <td><img ng-src="{{currentCat.image}}" /></td>
-                <td>
-                    <input type="number" min="0" max="1000" ng-model="currentCat.votes">
-                </td>
-
-            </tr>
-            <tr></tr>
+                </tr>
+            </tbody>
         </table>
-    </div>
+    </article>
+    
+    <aside class="col-md-5" ng-if="currentCat">
+        <div class="container-fluid" >
+            <div class="col-md-3 current-cat-data">
+                <div><span>Name: {{currentCat.name}}</span></div>
+                <div><span>Votes: </span><input class="form-control current-cat-input" type="number" min="0" max="1000" ng-model="currentCat.votes"></div>
+            </div>
+            <div class="col-md-9 current-cat-image">
+                <img class="img-thumbnail dimension" ng-src="{{currentCat.image}}" />
+            </div>
+            
+        </div>
+    </aside>
 </div>
 
