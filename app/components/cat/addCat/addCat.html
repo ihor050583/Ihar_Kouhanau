@@ -1,4 +1,5 @@
 ﻿<form name="myForm" novalidate>
+    
     <div>
         <label for="name">Cat's name </label>
         <input type="text" name="name" ng-model="cat.name" required />
@@ -8,11 +9,26 @@
 
     <div>
         <label for="image">URL of image</label>
-        <input ng-blur="url=cat.image" type="url" name="image" ng-model="cat.image" required />
+        <input ng-blur="url=cat.image" type="url" name="image" ng-model="cat.image" required/>
         <span style="color: red" ng-show="myForm.image.$error.required">Required!</span>
         <span style="color: red" ng-show="myForm.$error.url">Invalid URL format!</span>
         
     </div>
+    <div>
+        <label for="date">Created at </label>
+        <input placeholder="Date" type="text" name="date" ng-model="cat.date" required datepicker-popup="MM/dd/yyyy"
+               is-open="opened" ng-click="open($event)" close-text="Close" />
+        <span style="color: red" ng-show="myForm.date.$error.required">Required!</span>
+
+    </div>
+    <div>
+        <ui-select multiple tagging tagging-label="(custom 'new' label)" ng-model="cat.labels" theme="bootstrap" sortable="true" style="width: 300px;">
+            <ui-select-match placeholder="Select labels...">{{$item}}</ui-select-match>
+            <ui-select-choices repeat="label in availableLabels | filter:$select.search">
+                {{label}}
+            </ui-select-choices>
+        </ui-select>
+    </div> <br/>
 
     <button ng-disabled="myForm.$invalid" ng-click="save()">Submit</button>
     <button ng-click="cancel()">Cancel</button>

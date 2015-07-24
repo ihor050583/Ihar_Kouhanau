@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp', ['ui.router', 'cat', 'charts', 'fotorama'])
+angular.module('myApp', ['ui.router', 'cat', 'charts', 'fotorama', 'ui.grid', 'ui.grid.selection', 'ui.bootstrap', 'ui.select'])
 .config(Config);
 
 

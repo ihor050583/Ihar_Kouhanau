@@ -11,9 +11,13 @@
     "angular-loader": "~1.4.0",
     "angular-mocks": "~1.4.0",
 	"angular-ui-router": "latest",
+	"angular-ui-grid": "latest",
+	"angular-ui-select": "latest",
+    "angular-bootstrap": "latest",	
 	"bootstrap": "latest",
     "html5-boilerplate": "~5.2.0",
     "fotorama": "~4.6.4",
-    "d3": "~3.5.6"
+    "d3": "~3.5.6",
+	"underscore": "latest"
   }
 }
