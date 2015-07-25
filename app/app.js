@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp', ['ui.router', 'cat', 'charts', 'fotorama', 'ui.grid', 'ui.grid.selection', 'ui.bootstrap', 'ui.select'])
+angular.module('myApp', ['ui.router', 'cat', 'charts', 'fotorama', 'ui.grid', 'ui.grid.selection', 'ui.bootstrap', 'ui.select', 'ngMessages', 'form'])
 .config(Config);
 
 
@@ -32,6 +32,12 @@ function Config($stateProvider, $urlRouterProvider) {
                 url: "/fotorama",
                 templateUrl: "components/fotorama/fotorama.html",
                 controller: "fotoramaController"
+            })
+    .state("form",
+            {
+                url: "/form",
+                templateUrl: "components/basic_forms/form.html",
+                controller: "formController"
             });
 
 
