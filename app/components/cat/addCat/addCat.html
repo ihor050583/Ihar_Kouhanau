@@ -1,36 +1,50 @@
-﻿<form name="myForm" novalidate>
-    
-    <div>
-        <label for="name">Cat's name </label>
-        <input type="text" name="name" ng-model="cat.name" required />
-        <span style="color: red" ng-show="myForm.name.$error.required">Required!</span>
-        
-    </div>
+﻿<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form name="myForm" novalidate>
 
-    <div>
-        <label for="image">URL of image</label>
-        <input ng-blur="url=cat.image" type="url" name="image" ng-model="cat.image" required/>
-        <span style="color: red" ng-show="myForm.image.$error.required">Required!</span>
-        <span style="color: red" ng-show="myForm.$error.url">Invalid URL format!</span>
-        
-    </div>
-    <div>
-        <label for="date">Created at </label>
-        <input placeholder="Date" type="text" name="date" ng-model="cat.date" required datepicker-popup="MM/dd/yyyy"
-               is-open="opened" ng-click="open($event)" close-text="Close" />
-        <span style="color: red" ng-show="myForm.date.$error.required">Required!</span>
+            <div class="form-group">
+                <label class="control-label">Cat's name </label>
+                <input class="form-control" type="text" name="name" ng-model="cat.name"
+                       ng-model-options="{ debounce : { 'default' : 1000 } }" required catname />
+                <div ng-if="myForm.name.$pending">Checking cat name</div>
+                <div ng-messages="myForm.name.$error">
+                    <div ng-messages-include="components/cat/messages.html"></div>
+                </div>
+            </div>
 
-    </div>
-    <div>
-        <ui-select multiple tagging tagging-label="(custom 'new' label)" ng-model="cat.labels" theme="bootstrap" sortable="true" style="width: 300px;">
-            <ui-select-match placeholder="Select labels...">{{$item}}</ui-select-match>
-            <ui-select-choices repeat="label in availableLabels | filter:$select.search">
-                {{label}}
-            </ui-select-choices>
-        </ui-select>
-    </div> <br/>
+            <div class="form-group">
+                <label class="control-label">URL of image</label>
+                <input class="form-control" ng-blur="url=cat.image" type="url" name="image" ng-model="cat.image" required />
+                <div ng-messages="myForm.image.$error">
+                    <div ng-messages-include="components/cat/messages.html"></div>
+                </div>
+            </div>
 
-    <button ng-disabled="myForm.$invalid" ng-click="save()">Submit</button>
-    <button ng-click="cancel()">Cancel</button>
-</form>
-<div ng-show="url"><img ng-src="{{url}}" /></div>
+            <div class="form-group">
+                <label class="control-label">Created at </label>
+                <input class="form-control" placeholder="Date" type="text" name="date" ng-model="cat.date" required datepicker-popup="MM/dd/yyyy"
+                       is-open="opened" ng-click="open($event)" close-text="Close" />
+                <div ng-messages="myForm.date.$error">
+                    <div ng-messages-include="components/cat/messages.html"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Labels</label>
+                <ui-select multiple tagging tagging-label="(custom 'new' label)" ng-model="cat.labels" theme="bootstrap" sortable="true">
+                    <ui-select-match placeholder="Select labels...">{{$item}}</ui-select-match>
+                    <ui-select-choices repeat="label in availableLabels | filter:$select.search">
+                        {{label}}
+                    </ui-select-choices>
+                </ui-select>
+            </div> <br />
+            <div class="form-group">
+                <button class="btn btn-primary" ng-disabled="myForm.$invalid" ng-click="save()">Submit</button>
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+            </div>
+        </form>
+        <div ng-show="url">
+            <img ng-src="{{url}}" />
+        </div>
+    </div>
+</div>

@@ -8,7 +8,30 @@ angular
             restrict: "E",
             scope: true
         }
-    });
+    })
+.directive("catname", function ($http, $q) {
+
+    var validateCatname = function (value) {
+        return $http.get("/app/components/cat/cats.json")
+                    .then(function (response) {
+                        if (response.data && _.contains(response.data, value)) {
+                            return $q.reject(false);
+
+                        }
+                        else {
+                            return $q.when(true);
+                        }
+                    });
+    };
+
+    return {
+        restrict: "A",
+        require: "ngModel",
+        link: function (scope, element, attributes, ngModel) {
+            ngModel.$asyncValidators.catname = validateCatname;
+        }
+    }
+});
 
 function createChart(scope, element, attributes) {
     var dataset = scope[attributes["ngModel"]];
@@ -48,7 +71,7 @@ function createChart(scope, element, attributes) {
         .enter()
         .append("text")
         .text(function (d) {
-            return d.name+" ("+ d[prop]+")";
+            return d.name + " (" + d[prop] + ")";
         })
         .attr("x", function (d, i) {
             return i * (width / dataset.length);
